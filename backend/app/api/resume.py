@@ -5,7 +5,7 @@ from app.reports.resume_pdf import create_resume_pdf
 
 router = APIRouter()
 
-@router.post("/api/v1/resume", response_model=Resume)
+@router.post("/api/v1/resume")
 async def create_resume(request: Resume):
     output_path = '/tmp/resume.pdf'
 

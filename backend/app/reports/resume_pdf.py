@@ -77,7 +77,7 @@ class ResumePDF(FPDF):
         self.add_page()
 
         # Add name
-        self.add_text(0, LINE_HEIGHT, resume.full_name, XPos.LMARGIN, YPos.NEXT, True, 16, 'C')
+        self.add_text(0, LINE_HEIGHT, resume.full_name.upper(), XPos.LMARGIN, YPos.NEXT, True, 16, 'C')
 
         # Add information text
         info_text = (f"{resume.location} {BULLET_POINT} {resume.phone_number} {BULLET_POINT}"
@@ -90,7 +90,7 @@ class ResumePDF(FPDF):
         for education in resume.education:
             self.add_text(self.page_width / 2, LINE_HEIGHT, f"{education.institution}, {education.location}", font_size = 11)
             timeline = f"{'CURRENT' if education.is_current else validate_and_format_date(education.graduation_date)}"
-            self.add_text(self.page_width / 2, LINE_HEIGHT, timeline, font_size = 11, x = XPos.LMARGIN, y = YPos.NEXT, align = 'R')
+            self.add_text(self.page_width / 2, LINE_HEIGHT, timeline.upper(), font_size = 11, x = XPos.LMARGIN, y = YPos.NEXT, align = 'R')
             self.add_text(0, LINE_HEIGHT, education.program_name, bold = True, font_size = 10, x = XPos.LMARGIN, y = YPos.NEXT)
 
         # Add professional experience
@@ -107,7 +107,7 @@ class ResumePDF(FPDF):
 
             timeline = f"{validate_and_format_date(start_date)} – {'Present' if is_current else validate_and_format_date(end_date)}"
 
-            self.add_text(self.page_width / 2, LINE_HEIGHT, timeline, x = XPos.LMARGIN, y = YPos.NEXT, align = 'R')
+            self.add_text(self.page_width / 2, LINE_HEIGHT, timeline.upper(), x = XPos.LMARGIN, y = YPos.NEXT, align = 'R')
 
             for position in experience.positions:
                 self.add_text(0, LINE_HEIGHT, f"{position.title}", bold = True, font_size = 10, x = XPos.LMARGIN, y = YPos.NEXT)
